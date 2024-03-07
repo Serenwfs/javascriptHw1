@@ -31,49 +31,55 @@
 //   let colorValue = `hsl(${H}, ${S}%, ${L}%)`; // Corrected format with commas
 //   return colorValue;
 // }
+
+
 // let box1 = document.getElementById("box1");
 // let box2 = document.getElementById("box2");
 // let box3 = document.getElementById("box3");
-
-// // set the background color of each box to a random color
-// box1.style.backgroundColor = randomColor();
+//  box1.style.backgroundColor = randomColor();
 // box2.style.backgroundColor = randomColor();
 // box3.style.backgroundColor = randomColor();
-// // Clear previous palette
-// ul.innerHTML = "";
-
 
 document.addEventListener("DOMContentLoaded", function() {
+  // create constent for the palette, the button and the palet contaimer
   const generateBtn = document.getElementById("generate");
+  const paletteContainer = document.getElementById("palette");
+  const ul = paletteContainer.querySelector("ul");
 
-  generateBtn.addEventListener("click", function() {
-      const numColors = parseInt(document.getElementById("nColors").value);
-      generatePalette(numColors);
+  ul.innerHTML = "";
+
+  const defaultNumColors = 3;
+  document.getElementById("nColors").value = defaultNumColors;
+  generatePalette(defaultNumColors);
+
+
+   generateBtn.addEventListener("click", function() {
+
+  // ee get the new number form the user 
+    const numColors = parseInt(document.getElementById("nColors").value);
+    ul.innerHTML = "";
+    generatePalette(numColors);
   });
 
   function generatePalette(numColors) {
-      const paletteContainer = document.getElementById("palette");
-      const ul = paletteContainer.querySelector("ul");
 
-      // Clear previous palette
-      ul.innerHTML = "";
-
-      // Generate new palette
-      for (let i = 0; i < numColors; i++) {
-          const colorBox = document.createElement("li");
-          colorBox.style.backgroundColor = randomColor();
-          ul.appendChild(colorBox);
-      }
+    // Now we genrate new palette
+    for (let i = 0; i < numColors; i++) {
+      const colorBox = document.createElement("li");
+      colorBox.style.backgroundColor = randomColor();
+      ul.appendChild(colorBox);
+    }
   }
 
   function randomColor() {
-      let H = Math.floor(Math.random() * 360);
-      let S = Math.floor(Math.random() * 100);
-      let L = Math.floor(Math.random() * 100);
-    
-      let colorValue = `hsl(${H}, ${S}%, ${L}%)`;
-      return colorValue;
+    let H = Math.floor(Math.random() * 360);
+    let S = Math.floor(Math.random() * 100);
+    let L = Math.floor(Math.random() * 100);
+    let colorValue = `hsl(${H}, ${S}%, ${L}%)`;
+    return colorValue;
   }
+
+  
 });
 
 
